@@ -13,6 +13,14 @@ display() {
     echo "------------------------------"
 }
 
+function1() {
+    uname -on
+}
+
+function2() {
+    whoami
+}
+
 selection() {
     
 case $1 in
@@ -24,11 +32,11 @@ case $1 in
 
     1)
         # Add your code for option 1 here
-        echo "Not implemented!"
+        function1
         ;;
     2)
         # Add your code for option 2 here
-        echo "Not implemented!"
+        function2
         ;;
 
     3)
