@@ -21,27 +21,84 @@ function2() {
     whoami
 }
 
+function3() {
+    while true
+    do
+        file_list=(*)
+        echo -e "\nThe list of files and directories:"
+        for item in "${file_list[@]}"; do
+            if [[ -f "$item" ]]; then
+                echo "F $item"
+            elif [[ -d "$item" ]]; then
+                echo "D $item"
+            fi
+        done
+        echo -e "\n"
+        echo "---------------------------------------------------"
+        echo "| 0 Main menu | 'up' To parent | 'name' To select |"
+        echo "---------------------------------------------------"
+        read choice
+        case $choice in
+            0)
+                # Exits Program
+                break
+                ;;        
+
+            'up')
+                # Provides OS Info
+                function3_to_parent
+                ;;
+            *)
+                # Provides User info
+                echo "here"
+                function3_to_select $choice
+                ;;
+
+        esac
+    done
+}
+
+function3_to_parent() {
+        echo "Not implemented!"
+}
+
+function3_to_select(){
+    found=false
+    file_list=(*)
+    for item in "${file_list[@]}"; do
+        if [[ "$item" == "$1" ]]; then
+            found=true
+            break
+        fi
+    done
+    if $found; then
+        echo "Not implemented!"
+    else
+        echo "Invalid input!"
+    fi
+}
+
 selection() {
     
 case $1 in
     0)
-        # Add your code for option 0 here
+        # Exits Program
         echo "Farewell!"
         return 0
         ;;        
 
     1)
-        # Add your code for option 1 here
+        # Provides OS Info
         function1
         ;;
     2)
-        # Add your code for option 2 here
+        # Provides User info
         function2
         ;;
 
     3)
-        # Add your code for option 3 here
-        echo "Not implemented!"
+        # File and Directory Operations
+        function3
         ;;
     4)
         # Add your code for option 3 here
