@@ -75,39 +75,85 @@ function3_select_directory() {
     cd $1
 }
 function3_select_file() {
-    echo "Not implemented!"
+    while true
+    do
+        echo "---------------------------------------------------------------------"
+        echo "| 0 Back | 1 Delete | 2 Rename | 3 Make writable | 4 Make read-only |"
+        echo "---------------------------------------------------------------------"
+        read choice
+        case $choice in
+            0)
+                # Back to file and dir menu
+                return 0
+                ;;        
+
+            1)
+                # delete file
+                rm $1
+                echo "$1 has been deleted."
+                return 0
+                ;;
+            2)
+                # rename file
+                echo "Enter the new file name:"
+                read new_name
+                mv $1 $new_name
+                echo "$1 has been renamed as $new_name"
+                return 0
+                ;;
+
+            3)
+                # make writable
+                chmod 666 $1
+                echo "Permissions have been updated."
+                ls -l $1
+                return 0
+                ;;
+            4)
+                # make read only
+                chmod 664 $1
+                echo "Permissions have been updated."
+                ls -l $1               
+                return 0
+                ;;        
+            *)
+                # Default Case
+                continue
+                ;;
+        esac   
+    done 
 }
 selection() {
     
-case $1 in
-    0)
-        # Exits Program
-        echo "Farewell!"
-        return 0
-        ;;        
+    case $1 in
+        0)
+            # Exits Program
+            echo "Farewell!"
+            return 0
+            ;;        
 
-    1)
-        # Provides OS Info
-        function1
-        ;;
-    2)
-        # Provides User info
-        function2
-        ;;
+        1)
+            # Provides OS Info
+            function1
+            ;;
+        2)
+            # Provides User info
+            function2
+            ;;
 
-    3)
-        # File and Directory Operations
-        function3
-        ;;
-    4)
-        # Add your code for option 3 here
-        echo "Not implemented!"
-        ;;        
-    *)
-        # Default Case
-        echo "Invalid option!"
-        ;;
-esac
+        3)
+            # File and Directory Operations
+            function3
+            ;;
+        4)
+            # Add your code for option 3 here
+            echo "Not implemented!"
+            ;;        
+        *)
+            # Default Case
+            echo "Invalid option!"
+            ;;
+    esac
 return 1
 }
 
