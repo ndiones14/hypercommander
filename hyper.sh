@@ -50,7 +50,6 @@ function3() {
                 ;;
             *)
                 # Provides User info
-                echo "here"
                 function3_to_select $choice
                 ;;
 
@@ -59,25 +58,25 @@ function3() {
 }
 
 function3_to_parent() {
-        echo "Not implemented!"
+    # move one directory up
+    cd ..
 }
 
-function3_to_select(){
-    found=false
-    file_list=(*)
-    for item in "${file_list[@]}"; do
-        if [[ "$item" == "$1" ]]; then
-            found=true
-            break
-        fi
-    done
-    if $found; then
-        echo "Not implemented!"
+function3_to_select() {
+    if [[ -f $1 ]]; then
+        function3_select_file $1
+    elif [[ -d $1 ]]; then
+        function3_select_directory $1
     else
         echo "Invalid input!"
-    fi
+    fi   
 }
-
+function3_select_directory() {
+    cd $1
+}
+function3_select_file() {
+    echo "Not implemented!"
+}
 selection() {
     
 case $1 in
