@@ -123,6 +123,22 @@ function3_select_file() {
         esac   
     done 
 }
+function4() {
+    echo "Enter an executable name:"
+    read exec_name
+    # Store result of which in exec_path variable
+    # 2>/dev/null used to clear out errors
+    exec_path=$(which "$exec_name" 2>/dev/null)
+    if [ -n $exec_path ]; then
+        echo -e "Located in: $exec_path\n"
+        echo "Enter arguments:"
+        read arguments
+        $exec_name $arguments
+    else 
+        echo "The executable with that name does not exist!"
+    fi
+}
+
 selection() {
     
     case $1 in
@@ -146,8 +162,8 @@ selection() {
             function3
             ;;
         4)
-            # Add your code for option 3 here
-            echo "Not implemented!"
+            # Find Executables
+            function4
             ;;        
         *)
             # Default Case
